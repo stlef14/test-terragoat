@@ -36,3 +36,14 @@ resource "google_compute_firewall" "allow_all_again" {
     ports    = ["0-65535"]
   }
 }
+
+resource "google_compute_firewall" "allow_all_again-demo" {
+  name          = "terragoat-${var.environment}-firewall-again-demo"
+  network       = google_compute_network.vpc.id
+  source_ranges = ["0.0.0.0/0"]
+  allow {
+    protocol = "tcp"
+    ports    = ["0-65535"]
+  }
+}
+
