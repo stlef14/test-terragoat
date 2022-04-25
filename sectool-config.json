@@ -62,7 +62,7 @@
         "aws-network-public-rdp": "alert",
         "aws-network-public-ssh": "alert",
         "aws-resource-outside-vpc": "alert",
-        "aws-resource-public-access": "alert",
+        "aws-resource-public-access": "block",
         "aws-resource-public-policy": "alert",
         "aws-s3-public-access": "alert",
         "aws-s3-public-policy": "alert",
