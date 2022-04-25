@@ -163,7 +163,7 @@ resource aws_eks_cluster "eks_cluster_2" {  # noboost
     yor_trace            = "7fa14261-c18d-4fa2-aec4-746f6e64d2d3"
   }
 }
-# Small irrelevant comment that does nothing
+
 
 output "endpoint" {
   value = "${aws_eks_cluster.eks_cluster.endpoint}"
