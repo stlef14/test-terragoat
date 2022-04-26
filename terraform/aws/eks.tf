@@ -139,6 +139,31 @@ resource aws_eks_cluster "eks_cluster" {
   }
 }
 
+resource aws_eks_cluster "eks_cluster2" {  # noboost
+  name     = local.eks_name.value
+  role_arn = "${aws_iam_role.iam_for_eks.arn}"
+
+  vpc_config {
+    endpoint_private_access = true
+    subnet_ids              = ["${aws_subnet.eks_subnet1.id}", "${aws_subnet.eks_subnet2.id}"]
+  }
+
+  depends_on = [
+    "aws_iam_role_policy_attachment.policy_attachment-AmazonEKSClusterPolicy",
+    "aws_iam_role_policy_attachment.policy_attachment-AmazonEKSServicePolicy",
+  ]
+  tags = {
+    git_commit           = "d68d2897add9bc2203a5ed0632a5cdd8ff8cefb0"
+    git_file             = "terraform/aws/eks.tf"
+    git_last_modified_at = "2020-06-16 14:46:24"
+    git_last_modified_by = "nimrodkor@gmail.com"
+    git_modifiers        = "nimrodkor"
+    git_org              = "bridgecrewio"
+    git_repo             = "terragoat"
+    yor_trace            = "7fa14261-c18d-4fa2-aec4-746f6e64d2d3"
+  }
+}
+
 output "endpoint" {
   value = "${aws_eks_cluster.eks_cluster.endpoint}"
 }
