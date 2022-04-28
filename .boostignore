@@ -1,0 +1,17 @@
+test_data/
+terraform/azure/
+terraform/gcp/
+terraform/aws/resources
+terraform/aws/consts.tf
+terraform/aws/db-app.tf
+terraform/aws/ec2.tf
+terraform/aws/ecr.tf
+terraform/aws/elb.tf
+terraform/aws/es.tf
+terraform/aws/iam.tf
+terraform/aws/kms.tf
+terraform/aws/lambda.tf
+terraform/aws/neptune.tf
+terraform/aws/providers.tf
+terraform/aws/rds.tf
+terraform/aws/s3.tf
