@@ -1,4 +1,4 @@
-test_data/
+
 terraform/azure/
 terraform/gcp/
 terraform/aws/resources
