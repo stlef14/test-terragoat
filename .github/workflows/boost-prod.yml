@@ -28,3 +28,4 @@ jobs:
           additional_args: --disable-telemetry --api-version v2
           cli_version: 3.0.0.rc483
           scanner_version: 3.0.0.rc483
+
