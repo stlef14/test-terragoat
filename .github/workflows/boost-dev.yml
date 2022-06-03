@@ -1,3 +1,4 @@
+name: SAST
 on:
   workflow_dispatch:
   push:
