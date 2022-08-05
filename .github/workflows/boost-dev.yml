@@ -18,26 +18,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Download boost-convert-snyk
+      - name: Download snyk
         run: |
           curl https://static.snyk.io/cli/latest/snyk-linux -o /tmp/snyk
           chmod +x /tmp/snyk
           /tmp/snyk auth ${{ secrets.SNYK_TOKEN }}
 
-          curl https://assets.build.boostsecurity.io/boost-convert-snyk/dev-convert-snyk -o /tmp/get-convert-snyk
-          chmod +x /tmp/get-convert-snyk
+          docker pull public.ecr.aws/boostsecurityio/boostsecurityio-convert-snyk:latest
 
-          # TODO - switch to release branch once merged
-          bash /tmp/get-convert-snyk 1.0.0.rc5
-      - name: Generate snyk converter exec command
-        run: |
-          cat <<EOF > /tmp/runner
+          cat <<EOF > /tmp/snyk-wrapper
           #!/bin/bash
-          /tmp/snyk test --json | /tmp/boost/convert-snyk/latest/boost-convert-snyk process -
+          /tmp/snyk test --json |
+          docker run \
+            --rm \
+            --interactive \
+            public.ecr.aws/boostsecurityio/boostsecurityio-convert-snyk:latest \
+            process -
           EOF
-          chmod +x /tmp/runner
-
-          bash -x /tmp/runner
+          chmod +x /tmp/snyk-wrapper
       - name: BoostSecurity Scanner
         uses: boostsecurityio/boostsec-scanner-github@v3
         with:
@@ -50,6 +48,6 @@ jobs:
           action: exec
           api_endpoint: https://api.dev.boostsec.io
           api_token: ${{ secrets.BOOST_API_KEY_DEV }}
-          exec_command: /tmp/runner
+          exec_command: /tmp/snyk-wrapper
           additional_args: --require-full-repo
           step_name: snyk-sca
