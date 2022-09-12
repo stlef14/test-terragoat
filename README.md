@@ -138,7 +138,7 @@ done
 
 #### Installation (Azure)
 
-You can deploy multiple TerraGoat stacks in a single Azure subscription using the parameter `TF_VAR_environment`.
+You can deploy multiple TerraGoat stacks in a single Azure subscription using the parameter `TF_VAR_environment`
 
 #### Create an Azure Storage Account backend to keep Terraform state
 
